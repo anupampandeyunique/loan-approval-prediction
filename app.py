@@ -63,7 +63,7 @@ st.divider()
 
 # User Inputs
 
-   col1, col2 = st.columns(2)
+col1, col2 = st.columns(2)
 
 with col1:
 
