@@ -62,77 +62,84 @@ st.markdown(
 st.divider()
 
 # User Inputs
-gender_option = st.selectbox(
-    "Gender",
-    ["Male", "Female"]
-)
-gender = 1 if gender_option == "Male" else 0
 
-married_option = st.selectbox(
-    "Marital Status",
-    ["No", "Yes"]
-)
-married = 1 if married_option == "Yes" else 0
+   col1, col2 = st.columns(2)
 
-dependents = st.number_input(
-    "Number of Dependents",
-    min_value=0,
-    max_value=5,
-    value=0
-)
+with col1:
 
-education_option = st.selectbox(
-    "Education",
-    ["Not Graduate", "Graduate"]
-)
-education = 1 if education_option == "Graduate" else 0
+    gender_option = st.selectbox(
+        "Gender",
+        ["Male", "Female"]
+    )
+    gender = 1 if gender_option == "Male" else 0
 
-self_emp_option = st.selectbox(
-    "Self Employed",
-    ["No", "Yes"]
-)
-self_employed = 1 if self_emp_option == "Yes" else 0
+    married_option = st.selectbox(
+        "Marital Status",
+        ["No", "Yes"]
+    )
+    married = 1 if married_option == "Yes" else 0
 
-applicant_income = st.number_input(
-    "Applicant Income",
-    min_value=0,
-    value=5000
-)
+    education_option = st.selectbox(
+        "Education",
+        ["Not Graduate", "Graduate"]
+    )
+    education = 1 if education_option == "Graduate" else 0
 
-coapplicant_income = st.number_input(
-    "Coapplicant Income",
-    min_value=0,
-    value=0
-)
+    applicant_income = st.number_input(
+        "Applicant Income",
+        min_value=0,
+        value=5000
+    )
 
-loan_amount = st.number_input(
-    "Loan Amount",
-    min_value=0,
-    value=150
-)
+    loan_amount = st.number_input(
+        "Loan Amount",
+        min_value=0,
+        value=150
+    )
 
-loan_term = st.number_input(
-    "Loan Amount Term (Months)",
-    min_value=0,
-    value=360
-)
+with col2:
 
-credit_option = st.selectbox(
-    "Credit History",
-    ["Poor", "Good"]
-)
-credit_history = 1 if credit_option == "Good" else 0
+    self_emp_option = st.selectbox(
+        "Self Employed",
+        ["No", "Yes"]
+    )
+    self_employed = 1 if self_emp_option == "Yes" else 0
 
-area_option = st.selectbox(
-    "Property Area",
-    ["Rural", "Semiurban", "Urban"]
-)
+    credit_option = st.selectbox(
+        "Credit History",
+        ["Poor", "Good"]
+    )
+    credit_history = 1 if credit_option == "Good" else 0
 
-property_area = {
-    "Rural": 0,
-    "Semiurban": 1,
-    "Urban": 2
-}[area_option]
+    dependents = st.number_input(
+        "Dependents",
+        min_value=0,
+        max_value=5,
+        value=0
+    )
+
+    coapplicant_income = st.number_input(
+        "Coapplicant Income",
+        min_value=0,
+        value=0
+    )
+
+    loan_term = st.number_input(
+        "Loan Amount Term (Months)",
+        min_value=0,
+        value=360
+    )
+
+    area_option = st.selectbox(
+        "Property Area",
+        ["Rural", "Semiurban", "Urban"]
+    )
+
+    property_area = {
+        "Rural": 0,
+        "Semiurban": 1,
+        "Urban": 2
+    }[area_option]
 
 st.divider()
 
