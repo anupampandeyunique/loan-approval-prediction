@@ -187,7 +187,7 @@ if st.button("Predict Loan Status"):
     else:
         st.error("❌ Loan Rejected")
         
-st.subheader("Prediction Summary")
-
-st.dataframe(result)
+    st.subheader("Prediction Summary")
+    st.dataframe(result)
+        
 st.caption("Developed using Machine Learning and Streamlit")
