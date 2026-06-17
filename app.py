@@ -113,7 +113,11 @@ if st.button("Predict Loan Status"):
     ]])
 
     prediction = model.predict(data)
-
+    probability = model.predict_proba(data)[0][1]
+    st.metric(
+    "Approval Probability",
+    f"{probability*100:.2f}%"
+)
     if prediction[0] == 1:
         st.success("✅ Loan Approved")
         st.balloons()
