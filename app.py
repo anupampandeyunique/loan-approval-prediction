@@ -188,6 +188,12 @@ if st.button("Predict Loan Status"):
         st.error("❌ Loan Rejected")
         
     st.subheader("Prediction Summary")
-    st.dataframe(result)
+    st.table(result)
+    st.download_button(
+    label="📥 Download Prediction Result",
+    data=result.to_csv(index=False),
+    file_name="loan_prediction_result.csv",
+    mime="text/csv"
+)
         
 st.caption("Developed using Machine Learning and Streamlit")
