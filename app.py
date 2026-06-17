@@ -2,6 +2,10 @@ import streamlit as st
 import pickle
 import numpy as np
 import pandas as pd 
+from io import BytesIO
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
+from reportlab.lib.styles import getSampleStyleSheet
+from datetime import datetime
 
 # Page Configuration
 st.set_page_config(
@@ -149,6 +153,67 @@ with col2:
 
 st.divider()
 
+#pdf
+def generate_pdf(result_df):
+    buffer = BytesIO()
+
+    doc = SimpleDocTemplate(buffer)
+    styles = getSampleStyleSheet()
+
+    elements = []
+
+    elements.append(
+        Paragraph("Loan Approval Prediction Report", styles['Title'])
+    )
+
+    elements.append(Spacer(1, 12))
+
+    elements.append(
+        Paragraph(
+            f"Generated On: {datetime.now().strftime('%d-%m-%Y %H:%M:%S')}",
+            styles['Normal']
+        )
+    )
+
+    elements.append(
+        Paragraph(
+            "Verification ID: LAPS-2026-001",
+            styles['Normal']
+        )
+    )
+
+    elements.append(Spacer(1, 12))
+
+    for col in result_df.columns:
+        elements.append(
+            Paragraph(
+                f"<b>{col}</b>: {result_df.iloc[0][col]}",
+                styles['Normal']
+            )
+        )
+
+    elements.append(Spacer(1, 20))
+
+    elements.append(
+        Paragraph(
+            "Digitally Generated Report - No Physical Signature Required",
+            styles['Italic']
+        )
+    )
+
+    elements.append(
+        Paragraph(
+            "Verified By: Anupam Pandey",
+            styles['Normal']
+        )
+    )
+
+    doc.build(elements)
+
+    pdf = buffer.getvalue()
+    buffer.close()
+
+    return pdf
 # Prediction Button
 if st.button("Predict Loan Status"):
 
@@ -189,11 +254,13 @@ if st.button("Predict Loan Status"):
         
     st.subheader("Prediction Summary")
     st.table(result)
+    pdf_file = generate_pdf(result)
+
     st.download_button(
-    label="📥 Download Prediction Result",
-    data=result.to_csv(index=False),
-    file_name="loan_prediction_result.csv",
-    mime="text/csv"
+    label="📄 Download PDF Report",
+    data=pdf_file,
+    file_name="loan_prediction_report.pdf",
+    mime="application/pdf"
 )
         
 st.caption("Developed using Machine Learning and Streamlit")
