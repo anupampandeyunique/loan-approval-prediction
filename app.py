@@ -1,6 +1,7 @@
 import streamlit as st
 import pickle
 import numpy as np
+import pandas as pd 
 
 # Page Configuration
 st.set_page_config(
@@ -53,7 +54,7 @@ with st.sidebar:
     st.markdown("----")
     st.write("Version:1.0")
     st.write("Status: Live ✅")
-    st.write("Develoyment: Streamlit Cloud")
+    st.write("Deployment: Streamlit Cloud")
 
 # Header
 st.title("🏦 Loan Approval Prediction System")
@@ -167,6 +168,14 @@ if st.button("Predict Loan Status"):
 
     prediction = model.predict(data)
     probability = model.predict_proba(data)[0][1]
+    result = pd.DataFrame({
+    "Applicant Income": [applicant_income],
+    "Loan Amount": [loan_amount],
+    "Probability (%)": [round(probability * 100, 2)],
+    "Prediction": [
+        "Approved" if prediction[0] == 1 else "Rejected"
+    ]
+})
     st.metric(
     "Approval Probability",
     f"{probability*100:.2f}%"
@@ -177,5 +186,8 @@ if st.button("Predict Loan Status"):
         st.balloons()
     else:
         st.error("❌ Loan Rejected")
+        
+st.subheader("Prediction Summary")
 
+st.dataframe(result)
 st.caption("Developed using Machine Learning and Streamlit")
