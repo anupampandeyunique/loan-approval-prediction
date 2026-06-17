@@ -49,6 +49,11 @@ with st.sidebar:
     st.write("Developer: Anupam Pandey")
 
     st.write("Project: Loan Approval Prediction")
+    
+    st.markdown("----")
+    st.write("Version:1.0")
+    st.write("Status: Live ✅")
+    st.write("Develoyment: Streamlit Cloud")
 
 # Header
 st.title("🏦 Loan Approval Prediction System")
@@ -166,6 +171,7 @@ if st.button("Predict Loan Status"):
     "Approval Probability",
     f"{probability*100:.2f}%"
 )
+    st.progress(float(probability))
     if prediction[0] == 1:
         st.success("✅ Loan Approved")
         st.balloons()
