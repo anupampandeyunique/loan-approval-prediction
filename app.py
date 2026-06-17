@@ -8,12 +8,42 @@ st.set_page_config(
     page_icon="🏦",
     layout="centered"
 )
+st.markdown("""
+<style>
+
+.main {
+    background-color: #f8fafc;
+}
+
+.stButton > button {
+    width: 100%;
+    height: 3.2em;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+div[data-testid="metric-container"] {
+    border: 2px solid #e5e7eb;
+    padding: 15px;
+    border-radius: 12px;
+}
+
+h1 {
+    text-align: center;
+}
+
+</style>
+""", unsafe_allow_html=True)
 
 # Load Model
 model = pickle.load(open('loan_model.pkl', 'rb'))
 
 # Header
 st.title("🏦 Loan Approval Prediction System")
+st.info(
+    "🏦 This ML system predicts the likelihood of loan approval based on applicant information."
+)
 st.markdown(
     "Fill in the applicant details below to predict whether the loan is likely to be approved."
 )
