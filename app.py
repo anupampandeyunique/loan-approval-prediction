@@ -38,6 +38,17 @@ h1 {
 
 # Load Model
 model = pickle.load(open('loan_model.pkl', 'rb'))
+#sidebar
+with st.sidebar:
+    st.header("📊 Project Details")
+
+    st.write("Model: Logistic Regression")
+
+    st.write("Accuracy: 78.86%")
+
+    st.write("Developer: Anupam Pandey")
+
+    st.write("Project: Loan Approval Prediction")
 
 # Header
 st.title("🏦 Loan Approval Prediction System")
